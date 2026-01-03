@@ -19,23 +19,7 @@ This project formulates emotion recognition as a **7-class image classification 
 
 ## Dataset
 
-- **Dataset:** FER2013 (Facial Expression Recognition 2013)
-- **Source:** Kaggle
-- **Number of classes:** 7  
-  *(Angry, Disgust, Fear, Happy, Sad, Surprise, Neutral)*
-- **Original format:**  
-  - Grayscale facial images  
-  - 48 × 48 resolution  
-
-The dataset is loaded dynamically from its CSV representation.  
-No raw dataset files are stored in this repository.
-
-Official dataset splits are preserved:
-- Training
-- PublicTest (validation)
-- PrivateTest (test)
-
-Detailed access instructions are provided in `data/README.md`.
+The project uses the FER2013 dataset for multi-class facial emotion recognition across seven emotion categories. Images are provided as grayscale facial samples and are dynamically loaded from the original CSV format without storing raw data in the repository. The dataset’s official training, validation, and test splits are preserved to ensure reproducibility. Detailed access instructions are available in data/README.md
 
 
 ## Preprocessing & Data Augmentation
@@ -83,7 +67,7 @@ This design balances representation quality, training stability, and computation
 ## Training Strategy
 
 Key training decisions include:
-- Transfer learning with partial layer freezing
+- Transfer learning with layer freezing
 - Class-balanced sampling during training
 - Separate learning rates for backbone and classifier
 - Hybrid learning rate schedule:
@@ -111,30 +95,12 @@ This ensures that minority-class behavior is explicitly analyzed, rather than hi
 
 ## Quantization & Optimization
 
-To prepare the model for efficient deployment:
-- The trained PyTorch model is exported to **ONNX**
-- **Dynamic quantization** is applied:
-  - Reduces model size
-  - Improves CPU inference latency
-  - Preserves predictive performance
-  - Requires no retraining
-
-The full conversion and quantization process is documented in:
-`notebooks/Quantization.ipynb`
+To enable efficient deployment, the trained model is exported to ONNX format and optimized using dynamic quantization. This reduces model size and improves CPU inference performance while preserving accuracy, without requiring retraining. The full conversion and optimization workflow is documented in notebooks/Quantization.ipynb.
 
 
 ## Real-Time Inference
 
-A lightweight real-time inference pipeline is implemented using:
-- OpenCV for webcam capture and face detection
-- ONNX Runtime for optimized CPU inference
-- Vision Transformer preprocessing for consistency with training
-
-For each detected face, the system outputs:
-- Predicted emotion label
-- Associated confidence score
-
-This demonstrates practical deployment of a transformer-based vision model in a real-time setting.
+A real-time emotion recognition pipeline is implemented using OpenCV for webcam capture and face detection, combined with ONNX Runtime for fast CPU-based inference. Each detected face is processed using Vision Transformer–compatible preprocessing, producing an emotion prediction along with a confidence score. This demonstrates practical deployment of a transformer-based vision model in a live setting.
 
 
 ## License
