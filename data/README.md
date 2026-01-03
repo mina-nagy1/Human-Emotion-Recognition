@@ -61,10 +61,3 @@ No extracted images, intermediate files, or preprocessing artifacts are stored i
 - Dataset handling logic is implemented in `src/dataset.py`
 - All preprocessing steps are fully reproducible
 
-
-## Notes
-
-- Images are converted to RGB and resized to 224×224 during preprocessing to match Vision Transformer (ViT) input requirements
-- Dataset handling logic is implemented in `src/dataset.py`
-- All preprocessing steps are fully reproducible
-
